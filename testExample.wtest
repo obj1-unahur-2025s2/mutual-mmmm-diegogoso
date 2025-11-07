@@ -1,9 +1,34 @@
-import example.pepita
-
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
-  }
-
+import viajes.*
+describe "test de Viajes"{
+  const viaje1 = new ViajeDePlaya( idiomas = "Ingles", largo = 300)
+  const viaje2 = new Ciudad( idiomas = "Espaniol", atracciones = 4)
+  const viaje3 = new CiudadTropical( idiomas = "Portugues", atracciones = 4)
+  const caminar = new SalidaDeTrekking( idiomas = "Italiano", kilometros = 100, diasDeSol = 130)
+test "test Viaje de Ciudad"{
+  assert.equals(2, viaje2.diasDeViaje())
+  assert.notThat(viaje2.implicaEsfuerzo())
+  assert.notThat(viaje2.broncearse())
+}
+test "test ciudad tropical"{
+  assert.equals(3, viaje3.diasDeViaje())
+  assert.notThat(viaje3.implicaEsfuerzo())
+  assert.that(viaje3.broncearse())
+}
+const nuevoViajeCiudad = new Ciudad( idiomas = "Frances", atracciones = 8)
+test "test nuevo viaje ciudad"{
+  assert.equals(4, nuevoViajeCiudad.diasDeViaje())
+  assert.that(nuevoViajeCiudad.implicaEsfuerzo())
+  assert.notThat(nuevoViajeCiudad.broncearse())
+}
+const nuevoViajeTropical = new CiudadTropical( idiomas = "Aleman", atracciones = 10)
+test "test nuevo viaje tropical"{
+  assert.equals(6, nuevoViajeTropical.diasDeViaje())
+  assert.notThat(nuevoViajeTropical.implicaEsfuerzo())
+  assert.that(nuevoViajeTropical.broncearse())
+}
+test "Caminata"{
+  assert.equals(2, caminar.diasDeViaje())
+  assert.that(caminar.implicaEsfuerzo())
+  assert.notThat(caminar.broncearse())
+}
 }
