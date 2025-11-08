@@ -32,3 +32,36 @@ test "Caminata"{
   assert.notThat(caminar.broncearse())
 }
 }
+describe "test de Socio"{
+  const roque = new Socio( actividadesPermitidas = 2, edad = 25, tipoDeSocio = "socioRelajado")
+  const viajeDePlaya1 = new ViajeDePlaya(largo = 1000)
+  const viajeDePlaya2 = new ViajeDePlaya(largo = 2000)
+  const claseGym = new Gimnasia()
+  const ana = new Socio( actividadesPermitidas = 3, edad = 28, tipoDeSocio = "SocioTranquilo")
+  const julian = new Socio( actividadesPermitidas = 5, edad = 35, tipoDeSocio = "SocioCoherente")
+  test "test de roque"{
+    roque.realizarActividad(viajeDePlaya1)
+    roque.realizarActividad(viajeDePlaya2)
+    assert.equals(2, roque.cantidadDeActividades())
+    assert.that(roque.esAdoradorDelSol())
+    assert.equals(#{viajeDePlaya2}, roque.actividadesEsforzadas())
+  }
+  test "test de roque no puede agregar mas actividades"{
+    roque.realizarActividad(viajeDePlaya1)
+    roque.realizarActividad(viajeDePlaya2)
+    //roque.realizarActividad(claseGym)
+    assert.throwsExceptionWithMessage("No se pueden realizar más actividades", { roque.realizarActividad(claseGym) })
+  }
+  test "test de Ana"{
+    ana.realizarActividad(viajeDePlaya1)
+    ana.realizarActividad(viajeDePlaya2)
+    assert.that(ana.puedeAgregarActividad())
+    assert.that(ana.esAdoradorDelSol())
+    assert.equals(2, ana.cantidadDeActividades())
+    ana.realizarActividad(claseGym)
+    assert.equals(3, ana.cantidadDeActividades())
+    assert.notThat(ana.esAdoradorDelSol())
+    assert.that(ana.actividadesEsforzadas().contains(viajeDePlaya2))
+    assert.equals(#{viajeDePlaya2, claseGym}, ana.actividadesEsforzadas())
+  }
+}
